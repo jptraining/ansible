@@ -1,0 +1,66 @@
+---
+# This playbook will deploy the web app with zero downtime (i.e: rolling update)
+# Set the value of serial_var to match the percentage or the number of hosts
+# to be updated at a time
+# Example of values of serial_var: 
+# Percentage of hosts to be updated at a time: 30%, 50%, ...etc. 100% will deploy with downtime
+# Number of hosts: 1, 2, ...etc.
+
+- name: This PLAY will gather facts from monitoring hosts
+  hosts: monitoring
+  remote_user: automatic
+  tasks: []
+
+- name: This PLAY will deploy the web app components
+  hosts: webservers
+  remote_user: automatic
+  become: yes
+  serial: 50%
+
+  pre_tasks:
+  - name: Disable monitoring alerts for this web server instance from nagios
+    nagios:
+      action: disable_alerts
+      host: "{{ inventory_hostname }}"
+      services: webserver
+    delegate_to: "{{ item }}"
+    with_items: groups.monitoring
+
+  - name: Disable this web server from haproxy load balancer
+    haproxy: 
+      state: disabled 
+      backend: myapplb
+      host: "{{ inventory_hostname }}"
+      socket: /var/lib/haproxy/stats
+    delegate_to: "{{ item }}"
+    with_items: groups.loadbalancers
+
+  roles:
+  - { role: common }
+  - { role: base-apache }
+  - { role: web }
+
+  post_tasks:
+  - name: Wait for the web server to be up
+    wait_for: 
+      host: "{{ inventory_hostname }}"
+      port: 80
+      state: started
+      timeout: 80
+
+  - name: Enable this web server on the haproxy load balancer
+    haproxy: 
+      state: enabled
+      backend: myapplb
+      host: "{{ inventory_hostname }}"
+      socket: /var/lib/haproxy/stats
+    delegate_to: "{{ item }}"
+    with_items: groups.lbservers
+
+  - name: Enable monitoring alerts for this web server instance on nagios
+    nagios:
+      action: enable_alerts
+      host: "{{ inventory_hostname }}"
+      services: webserver
+    delegate_to: "{{ item }}"
+    with_items: groups.monitoring

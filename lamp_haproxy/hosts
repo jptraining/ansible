@@ -1,0 +1,9 @@
+[webservers]
+web1    #ansible_host=jpenekusu2.mylabserver.com
+web2    #ansible_host=jpenekusu3.mylabserver.com
+[dbservers]
+db1     #ansible_host=jpenekusu2.mylabserver.com
+[lbservers]
+lb1     #ansible_host=jpenekusu5.mylabserver.com
+[monitoring]
+nagios  #ansible_host=jpenekusu5.mylabserver.com

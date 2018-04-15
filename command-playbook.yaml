@@ -1,0 +1,8 @@
+---
+- name: "This Is PLAY Documentation: This PLAY Executes Some Basic Commands On The Target Hosts"
+  hosts: webservers
+  tasks:
+  - name: "This Is Task Documentation: This Task Executes The Command pwd On Target Hosts"
+    command: pwd
+  - name: "This Is Task Documentation: This Task Executes The Command 'ls -l /' On Target Hosts"
+    command: ls -l /

@@ -1,0 +1,22 @@
+--- 
+- name: PLAY sur l'utilisation des variables PLAY vars_files
+  hosts: all  
+  remote_user: automatic
+  gather_facts: no
+
+  vars:
+    ma_variable: ma_variable PLAY vars
+  vars_prompt:
+  - name: ma_variable
+    prompt: "Entrer la valeur de ma_variable"
+
+  - name: mon_autre_variable
+    prompt: "Entrer la valeur de mon_autre_variable"
+
+  tasks: 
+  - name: Print variable 'vars_prompt ma_variable est écrasée par vars ma_variable' 
+    debug: 
+      msg: '{{ ma_variable }}'
+  - name: Print variable 'PLAY vars_prompt mon_autre_variable' 
+    debug: 
+      msg: '{{ mon_autre_variable }}'

@@ -1,0 +1,20 @@
+---
+- name: "This Is The PLAY Documentation: This PLAY Runs Some Modules On The Target Hosts"
+  hosts: webservers
+  become: true
+    
+  tasks:
+  - name: "This Is The Task Documentation: This Task Executes The Group Module On Target Hosts"
+    group:
+      name: "{{ item }}"
+      state: "{{ state }}"
+    loop: "{{ user_groups }}"
+
+  - name: "This Is The Task Documentation: This Task Creates Users On Target Hosts"
+    user:
+      name: "{{ item.name }}"
+      group: "{{ item.group | default(omit) }}"
+      groups: "{{ item.groups | default(omit) }}"
+      password: "{{ item.password | default(omit) }}"
+      state: "{{ state }}"
+    loop: "{{ users }}"

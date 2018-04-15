@@ -1,0 +1,11 @@
+--- 
+- name: PLAY sur l'utilisation des variables
+  hosts: all  
+  remote_user: automatic 
+  tasks: 
+  - name: Set variable 'ma_variable' 
+    set_fact: 
+      ma_variable: Test machine 
+  - name: Print variable 'ma_variable' 
+    debug: 
+      msg: '{{ ma_variable }}' 

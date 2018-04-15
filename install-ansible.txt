@@ -1,0 +1,20 @@
+#Centos/Reddhat
+sudo yum update && sudo yum -y upgrade #Upgrade 
+1. Using yum
+sudo yum -y install epel-release
+sudo yum -y install ansible
+2. Using pip
+sudo yum install python-pip python-devel -y
+sudo pip install ansible
+ansible --version
+
+#Ubuntu/Debian
+1. Using apt-get
+sudo apt-add-repository -y ppa:ansible/ansible
+sudo apt-get update && sudo apt-get -y upgrade #Upgrade 
+sudo apt-get install -y ansible
+2. Using pip
+sudo apt-get update && sudo apt-get -y upgrade #Upgrade 
+sudo apt-get install python-pip python-dev -y
+sudo pip install ansible
+ansible --version

@@ -1,0 +1,12 @@
+--- 
+- name: PLAY sur l'utilisation des variables PLAY vars_files
+  hosts: all  
+  remote_user: automatic
+  vars:
+    ma_variable: ma_variable PLAY vars
+  vars_files:
+    - vars/vars_files.yaml
+  tasks: 
+  - name: Print variable 'PLAY vars_files ma_variable' 
+    debug: 
+      msg: '{{ ma_variable }}'

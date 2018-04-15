@@ -1,0 +1,8 @@
+--- 
+- name: PLAY sur l'utilisation des variables
+  hosts: all  
+  remote_user: automatic 
+  tasks:  
+  - name: Print variable 'user_groups' 
+    debug: 
+      msg: '{{ user_groups }}'

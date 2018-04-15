@@ -1,0 +1,3 @@
+- name: role-nagios-nrpe-server
+  src: https://github.com/jloh/nagios-nrpe-server.git
+  version: master

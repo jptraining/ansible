@@ -1,0 +1,15 @@
+---
+- name: This PLAY will copy the ssh public key to the managed hosts
+  hosts: lampws
+  gather_facts: no
+  become: yes
+  vars:
+    authorized_key_state: present
+
+  tasks:
+  - name: Set authorized key for users 
+    authorized_key:
+      user: "{{ item.user }}"
+      state: "{{ authorized_key_state }}"
+      key: "{{ lookup('file', item.public_key_path) }}"
+    loop: "{{ authorized_key_list }}"

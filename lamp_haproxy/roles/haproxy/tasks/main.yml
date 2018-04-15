@@ -1,0 +1,18 @@
+---
+# This role installs HAProxy and configures it.
+
+- name: Download and install haproxy and socat
+  yum: name={{ item }} state=present
+  with_items:
+  - haproxy
+  - socat
+
+- name: Fix issue HAProxy cannot bind socket [0.0.0.0:8888]
+  command: setsebool -P haproxy_connect_any=1
+
+- name: Configure the haproxy cnf file with hosts
+  template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg
+  notify: restart haproxy
+
+- name: Start the haproxy service
+  service: name=haproxy state=started enabled=yes

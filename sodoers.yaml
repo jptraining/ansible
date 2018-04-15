@@ -1,0 +1,12 @@
+---
+- name: This PLAY Gives Sudo Privilege With NOPASSWD To Service Account
+  hosts: all
+  become: true
+  tasks:
+    - name: The Module lineinfile Will Provide Sudo NOPASSWD To The User Or Group {{ subject }}
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^{{ subject }}\s'
+        line: '{{ subject }} ALL=(ALL) NOPASSWD: ALL'
+

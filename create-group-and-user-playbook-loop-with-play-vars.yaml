@@ -1,0 +1,32 @@
+---
+- name: "This Is The PLAY Documentation: This PLAY Runs Some Modules On The Target Hosts"
+  hosts: webservers
+  become: true
+  vars:
+    state: present
+    user_groups:
+      - admin
+      - sysadmins
+      - developpers
+      - wheel
+
+    users:
+      - { name: developper1, groups: "developpers, sysadmins", password: $6$nn8ko7wO$5CgwCTjhNUwugB3QqElkn1gstgWhpDsJTD2Iiyg1VVCOEp5UoFjYc9bh85RCZ1HL2rA5Ogv0/eulu4gbpTw5D.  }
+      - { name: developper2, group: admin, groups: developpers, password: $6$woGc.X2wfOlD3$z.zxCiMB.2toTQp9a34ss7L77curGesVYDFv7tvQI7f2cOKc9KH1FDkuQDr9OCYyS0fsaU/AktlhPujOrKHHb/ }
+      - { name: automatic, group: wheel }
+    
+  tasks:
+  - name: "This Is The Task Documentation: This Task Executes The Group Module On Target Hosts"
+    group:
+      name: "{{ item }}"
+      state: "{{ state }}"
+    loop: "{{ user_groups }}"
+
+  - name: "This Is The Task Documentation: This Task Creates Users On Target Hosts"
+    user:
+      name: "{{ item.name }}"
+      group: "{{ item.group | default(omit) }}"
+      groups: "{{ item.groups | default(omit) }}"
+      password: "{{ item.password | default(omit) }}"
+      state: "{{ state }}"
+    loop: "{{ users }}"

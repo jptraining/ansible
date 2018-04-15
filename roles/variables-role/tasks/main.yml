@@ -1,0 +1,4 @@
+---
+- name: Print role variable 'ma_variable' 
+  debug: 
+    msg: '{{ ma_variable }}'

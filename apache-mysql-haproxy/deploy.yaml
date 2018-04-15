@@ -1,0 +1,44 @@
+---
+# This playbook will deploy the entire application stack
+
+- name: This PLAY applies common configuration on all hosts
+  hosts: all
+  remote_user: automatic
+  become: yes
+
+  roles:
+  - { role: common }
+
+- name: This PLAY will deploy the database
+  hosts: dbservers
+  remote_user: automatic
+  become: yes
+  
+  roles:
+  - { role: mysql }
+
+- name: This PLAY will install apache and deploy the web app
+  hosts: webservers
+  remote_user: automatic
+  become: yes
+
+  roles:
+  - { role: apache }
+  - { role: web-app }
+
+- name: This PLAY will install the load balancer
+  hosts: loadbalancers
+  remote_user: automatic
+  become: yes
+
+  roles:
+  - { role: haproxy }
+
+- name: This PLAY will install the monitoring
+  hosts: monitoring
+  remote_user: automatic
+  become: yes
+
+  roles:
+  - { role: apache }
+  - { role: nagios }
