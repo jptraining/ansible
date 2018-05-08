@@ -1,4 +1,7 @@
 ---
-- name: Print role variable 'ma_variable' 
+- name: Print role variable 'ma_variable' role/vars
   debug: 
-    msg: '{{ ma_variable }}'
+    msg: 'ma_variable : {{ ma_variable }}'
+- name: Print role variable 'ma_variable_default' role/default
+  debug: 
+    msg: 'ma_variable_default : {{ ma_variable_default }}'

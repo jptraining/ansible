@@ -1,0 +1,19 @@
+---     
+- name: PLAY using loops with_fileglob
+  hosts: all 
+  remote_user: ansible 
+  gather_facts: no
+
+  tasks: 
+  - name: Vérifier que le répertoire /tmp/X11 existe 
+    file: 
+      dest: '/tmp/X11' 
+      state: directory
+    become: True 
+  - name: Copier les fichiers dont le nom commence par X dans le repértoire /tmp/X11
+    copy: 
+      src: '{{ item }}' 
+      dest: '/tmp/X11'
+    become: True 
+    with_fileglob: 
+    - '/etc/X11/X*'

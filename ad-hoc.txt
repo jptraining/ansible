@@ -1,18 +1,20 @@
-#run command module (i.e: -m) with argument (-a) pwd
+#Exécuter le module command (i.e: -m) avec des arguments (-a) pwd
 ansible webservers -i hosts -m command -a "pwd"
 
-#add verbose option to display connection data
+#Changer le niveau de logs
 ansible webservers -i hosts -m command -a "pwd" -vvv
 
-#display ansible help
+#Afficher l'aide de la commande ansible
 ansible -h
 
-#add -u and -k options to provide user login and password
+#Ajouter les options -u and -k pour saisir le login et le mot de passe
 ansible webservers -i hosts -m command -a "pwd" -vvv -u login -k
 
 #Lister le contenu du repertoire racine des serveurs distants avec le module command :
 ansible webservers -i hosts -m command -a "ls -l /" -u user -k
 
+#Exécuter le module ping
+ansible webservers -i hosts -m ping"
 
 #Executer un script shell sur les serveurs distants avec le module script:
 ansible webservers -i hosts -m script -a "my_script.sh 76542" -u user -k

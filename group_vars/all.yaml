@@ -17,7 +17,7 @@ nagios_nrpe_server_allowed_hosts_var:
   - 127.0.0.1
 state: present
 user_groups:
-  - sysadmins
+  - all
   - developpers
   - whell
 users:

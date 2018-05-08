@@ -1,0 +1,18 @@
+--- 
+- hosts: database 
+  remote_user: ansible 
+  gather_facts: no
+
+  tasks: 
+  - name: Compter les process sur le serveur distant 
+    shell: ps | wc -l 
+    register: remote_processes_number
+  - name: Afficher le nombre de process sur le serveur distant 
+    debug: 
+      msg: 'Nombre de process sur le serveur distant : {{ remote_processes_number.stdout }}' 
+  - name: Compter les process sur le serveur local
+    local_action: shell ps | wc -l 
+    register: local_processes_number 
+  - name: Afficher le nombre de process sur le serveur local 
+    debug: 
+      msg: 'Nombre de process sur le serveur local : {{ local_processes_number.stdout }}'

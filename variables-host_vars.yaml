@@ -1,0 +1,10 @@
+--- 
+- name: PLAY sur l'utilisation des variables host_vars
+  hosts: all
+  gather_facts: no
+  remote_user: automatic
+  
+  tasks:  
+  - name: Print valeur de la variable 'mon_certificat_ssl' 
+    debug: 
+      msg: '{{ mon_certificat_ssl | default("Cette machine ne possède pas cette variable") }}'

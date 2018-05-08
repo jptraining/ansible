@@ -1,0 +1,9 @@
+--- 
+- name: PLAY sur l'utilisation des variables group_vars
+  hosts: all  
+  remote_user: automatic
+  gather_facts: no
+  tasks:  
+  - name: Print variable 'user_groups' 
+    debug: 
+      msg: "{{ user_groups }} got from group {{ group_names }}"

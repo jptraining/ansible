@@ -1,0 +1,27 @@
+--- 
+- name: PLAY using loops with_items/with_nested
+  hosts: all 
+  remote_user: ansible 
+  vars: 
+    users: 
+    - alice 
+    - bob 
+    folders: 
+    - mail 
+    - public_html 
+  tasks: 
+  - name: Vérifier que l'utilisateur existe 
+    user: 
+      name: '{{ item }}'
+      state: present
+    become: True 
+    with_items: 
+    - '{{ users }}' 
+  - name: Vérifier que le répertoire existe 
+    file: 
+      path: '/home/{{ item.0 }}/{{ item.1 }}' 
+      state: directory 
+    become: True 
+    with_nested: 
+    - '{{ users }}' 
+    - '{{ folders }}'

@@ -1,33 +1,42 @@
+#Créer l'utilisateur ansible
+ansible-playbook -i hosts create-ansible-automation-user.yaml
+
 #Variables extra_vars: vérifier la valeur de ma_variable dans les logs
 ansible-playbook -i hosts variables-extra-vars.yaml -e "ma_variable='ma_variable extra vars'"
 
 #Variables de role: vérifier la valeur de ma_variable dans les logs
-$ ansible-playbook -i hosts variables-role.yaml
+ ansible-playbook -i hosts variables-role.yaml
 
 #Variables register et set_fact: vérifier la valeur de ma_variable dans les logs
-$ ansible-playbook -i hosts variables-register.yaml
-$ ansible-playbook -i hosts variables-set_fact.yaml
+ ansible-playbook -i hosts variables-register.yaml
+ ansible-playbook -i hosts variables-set_fact.yaml
 
 #Variables via le module include_vars
-$ansible-playbook -i hosts variables-include_vars.yaml 
+ansible-playbook -i hosts variables-include_vars.yaml 
 
 #Variables déclarées dans role/vars/main.yaml
-$ansible-playbook -i hosts variables-role-vars.yaml 
+ansible-playbook -i hosts variables-role-vars.yaml 
 
 #Variables de play déclarées avec la directive vars_files
-$ansible-playbook -i hosts variables-vars_files.yaml 
+ansible-playbook -i hosts variables-vars_files.yaml 
 
 #Variables de play saisies par l'utilisateur avec la directive vars_prompt
-$ansible-playbook -i hosts variables-vars_prompt.yaml 
+ansible-playbook -i hosts variables-vars_prompt.yaml 
 
 #Variables de play déclarées avec la directive vars
-$ansible-playbook -i hosts variables-vars.yaml 
+ansible-playbook -i hosts variables-vars.yaml 
 
+#Variables remontées par les machines distantes sous forme de metadata
+ansible-playbook -i hosts variables-facts.yaml -l 'all:!localhost'
 
+#Variables spécifiques à une machine déclarées dans host_vars
+ansible-playbook -i hosts variables-host_vars.yaml
 
-#variables de groupes: vérifier la valeur de user_groups dans les logs
-ansible-playbook -i hosts variables-groups-vars.yaml -l 'all:!localhost'
+#Variables de groupes: vérifier la valeur de user_groups dans les logs
+ansible-playbook -i hosts variables-group_vars.yaml -l 'all:!localhost'
 
+#Variables par défaut d'un rôle: vérifier la valeur de user_groups dans les logs
+ansible-playbook -i hosts variables-role-defaults.yaml
 
 
 

@@ -1,0 +1,8 @@
+--- 
+- name: PLAY sur l'utilisation des variables role/defaults
+  hosts: all  
+  remote_user: automatic
+  gather_facts: no
+  
+  roles: 
+    - role: variables-role
