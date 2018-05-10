@@ -1,0 +1,32 @@
+#install tower cli
+sudo pip install ansible-tower-cli
+
+#configure tower cli
+tower-cli config host tower.host.com
+tower-cli config username local_service_account
+tower-cli config password my_password
+
+#Try tower-cli
+tower-cli user get --username=admin
+Error: There was a network error of some kind trying to connect to Tower.
+
+The most common  reason for this is a settings issue; is your "host" value in `tower-cli config` correct?
+Right now it is: "jpenekusu6.mylabserver.com".
+
+#pass http host argument
+user@jpenekusu4 ~/ansible (master)  tower-cli user get --username=admin -h http://jpenekusu6.mylabserver.com
+Error: Can not verify ssl with non-https protocol. Change the verify_ssl configuration setting to continue.
+
+#Set ssl verify to false
+tower-cli config verify_ssl false
+
+#pass http host argument
+tower-cli user get --username=admin -h http://jpenekusu6.mylabserver.com
+== ======== ============== ========== ========= ============ =================
+id username     email      first_name last_name is_superuser is_system_auditor
+== ======== ============== ========== ========= ============ =================
+ 1 admin    root@localhost                              true             false
+== ======== ============== ========== ========= ============ =================
+
+#tower-cli help
+tower-cli --help

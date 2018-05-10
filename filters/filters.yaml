@@ -1,0 +1,25 @@
+---
+- name: PLAY Test des filtres jinja2
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    ma_liste:
+      - x
+      - 7
+      - o
+      - A
+      - 0 
+  tasks:
+  - name: Tirer un caractère dans la liste au hasard
+    debug:
+      var: ma_liste | random
+  - name: Tirer un chiffre de 0 à 250 au hasard
+    debug:
+      var: 250 | random      
+  - name: Créer une chaine des caractères séparés par un point virgule à partir d'une liste
+    debug:
+      var: ma_liste | join(';')
+  - name: Valeur par défaut d'une variable non renseignée 
+    debug:
+      var: ma_liste_non_renseigne | default('valeur par défaut de ma variable non renseignée')

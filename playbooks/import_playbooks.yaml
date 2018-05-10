@@ -1,0 +1,14 @@
+- name: Inclure le playbook local_action_plugin.yaml
+  import_playbook: local_action_plugin.yaml
+
+- name: Inclure le playbook when-conditional-testing-mandatory-variables-best-practice.yaml
+  import_playbook: when-conditional-testing-mandatory-variables-best-practice.yaml directory="/home/$USER"
+
+- name: PLAY utilisation de delegate_to
+  hosts: database 
+  remote_user: ansible 
+  gather_facts: yes
+  
+- name: Inclure le playbook delegate_to.yaml sous condition
+  import_playbook: delegate_to.yaml
+  when: ansible_os_family == "RedHat"

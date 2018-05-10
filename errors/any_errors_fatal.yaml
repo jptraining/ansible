@@ -1,0 +1,15 @@
+--- 
+- name: PLAY for error handling
+  hosts: all 
+  remote_user: ansible
+  any_errors_fatal: true   
+
+  tasks: 
+  - name: Cette reportera un changement si le cod retour est != 2
+    shell: /usr/bin/billybass --mode="take me to the river"
+    register: bass_result
+    changed_when: "bass_result.rc != 2"
+
+  - name: Cette tache ne reportera jamais un changement
+    shell: wall 'beep'
+    changed_when: False

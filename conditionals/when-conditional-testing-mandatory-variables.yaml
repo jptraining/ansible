@@ -1,0 +1,11 @@
+- hosts: webservers 
+  remote_user: ansible
+
+  tasks:
+    - name: Vérifier que la variable obligatoire directory est renseignée
+      fail: 
+        msg: 'La variable directory doit être renseigné' 
+      when: directory is not defined 
+    - name: Lister le contenu du répertoire directory 
+      command: ls -latr {{ directory }}
+      when: True 

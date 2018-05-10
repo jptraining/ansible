@@ -28,11 +28,11 @@ ansible all -i hosts -m setup -a 'filter=*ipv4*' -u user -k
 #Affichage des facts avec un filtre sur les interface 0, 1 et 2
 ansible all -i hosts -m setup -a 'filter=ansible_eth[0-2]'
 
-#Add ssh key to ssh key manager
-ssh-add ~/.ssh/id_rsa 
-
 #Start ssh key agent
 eval $(ssh-agent -s)
+
+#Add ssh key to ssh key manager
+ssh-add ~/.ssh/id_rsa 
 
 #Creer le group automatic sur les serveurs distants avec le module group:
 ansible webservers -i hosts -m group -a "state=present name=automatic" -u user -k -b -K

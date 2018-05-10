@@ -1,6 +1,0 @@
----
-- name: "This Is PLAY Documentation: This PLAY Executes Some Basic Commands On The Target Hosts"
-  hosts: webservers
-  tasks:
-  - name: "This Is Task Documentation: This Task Executes The script Module On Target Hosts"
-    script: my_script.sh Jerome

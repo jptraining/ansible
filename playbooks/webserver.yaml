@@ -1,0 +1,25 @@
+--- 
+- hosts: webservers
+  remote_user: ansible 
+  tasks: 
+  - name: Vérifiez que le package httpd est installé  
+    yum: 
+      name: httpd 
+      state: present 
+  - name: Vérifiez que le service httpd est activé et en cours d'exécution 
+    service: 
+      name: httpd 
+      state: started 
+      enabled: True 
+  - name: vérifier que http peut passer le pare-feu 
+    firewalld:
+      service: http 
+      state: enabled 
+      permanent: True 
+      immediate: True 
+  - name: vérifier que https peut passer le pare-feu 
+    firewalld: 
+      service: https 
+      state: enabled 
+      permanent: True 
+      immediate: True 

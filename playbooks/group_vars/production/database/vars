@@ -1,0 +1,9 @@
+myql_state: present
+mysq_group: mysql
+mysql_password: "{{ vault_mysql_password }}"
+variable_secrete_x: "{{ vault_variable_secrete_x }}"
+variable_secrete_y: "{{ vault_variable_secrete_y }}"
+variable_secrete_z: "{{ vault_variable_secrete_z }}" 
+mysql_user: mysql
+mysql_port: 3306
+

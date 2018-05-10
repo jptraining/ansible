@@ -1,0 +1,9 @@
+--- 
+- name: PLAY for error handling
+  hosts: all 
+  remote_user: ansible
+  max_fail_percentage: 20   
+
+  tasks: 
+  - name: Ce play s'arrêtera lorsque 20% des machines tomberont en erreur
+    shell: /bin/false

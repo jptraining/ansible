@@ -1,0 +1,32 @@
+--- 
+- hosts: webservers 
+  remote_user: ansible
+  gather_facts: no
+  become: True
+
+  vars:
+    http_port: 80
+    http_charset: "UTF-8"
+
+  tasks:
+  - name: Vérifier que apache est installé 
+    yum:
+      name: httpd 
+      state: present 
+  - name: Vérifier que apache est activé et démarré 
+    service: 
+      name: httpd 
+      state: started
+      enabled: yes
+    ignore_errors: true
+  - name: Vérifier que la configuration du serveur apache est à jour 
+    template: 
+      src: httpd.conf.j2 
+      dest: /etc/httpd/conf/httpd.conf
+    notify: Rédemarrer le serveur apache 
+  
+  handlers: 
+  - name: Rédemarrer le serveur apache 
+    service:
+      name: httpd
+      state: restarted

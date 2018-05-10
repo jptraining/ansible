@@ -1,0 +1,41 @@
+---
+# tasks file for roles/common
+- name: Vérfifier que le dépot des binaires yum EPEL est présent 
+  yum: 
+    name: epel-release 
+    state: present
+- name: Vérfifier que libselinux-python est present 
+  yum: 
+    name: libselinux-python  
+    state: present 
+- name: Vérfifier que libsemanage-python est present 
+  yum: 
+    name: libsemanage-python
+    state: present 
+- name: Vérfifier que NTP est present 
+  yum: 
+    name: ntp 
+    state: present 
+- name: Vérfifier que le timezone est positionné à UTC 
+  file: 
+    src: /usr/share/zoneinfo/Europe/Paris 
+    dest: /etc/localtime 
+    state: link 
+- name: Vérfifier que le service NTP est lancé et est activé 
+  service: 
+    name: ntpd 
+    state: started
+- name: Vérfifier que FirewallD est present 
+  yum: 
+    name: firewalld 
+    state: present 
+- name: Vérfifier que FirewallD est lancé 
+  service: 
+    name: firewalld 
+    state: started 
+- name: Vérfifier que SSH peut passer le firewall 
+  firewalld: 
+    service: ssh 
+    state: enabled 
+    permanent: True 
+    immediate: True

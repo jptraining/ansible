@@ -1,0 +1,14 @@
+--- 
+- name: PLAY that decide when a change has occured
+  hosts: all 
+  remote_user: ansible 
+
+  tasks: 
+  - name: Cette reportera un changement si le cod retour est != 2
+    shell: /usr/bin/billybass --mode="take me to the river"
+    register: bass_result
+    changed_when: "bass_result.rc != 2"
+
+  - name: Cette tache ne reportera jamais un changement
+    shell: wall 'beep'
+    changed_when: False

@@ -1,0 +1,28 @@
+---
+# tasks file for roles/webserver
+- name: Vérifiez que le package httpd est installé  
+  yum: 
+    name: httpd 
+    state: present 
+- name: Vérifiez que le service httpd est activé et en cours d'exécution 
+  service: 
+    name: httpd 
+    state: started 
+    enabled: True 
+- name: Vérifier que la configuration du serveur apache est à jour 
+  template: 
+    src: httpd.conf.j2 
+    dest: /etc/httpd/conf/httpd.conf
+  notify: Rédemarrer le serveur apache     
+- name: vérifier que http peut passer le pare-feu 
+  firewalld:
+    service: http 
+    state: enabled 
+    permanent: True 
+    immediate: True 
+- name: vérifier que https peut passer le pare-feu 
+  firewalld: 
+    service: https 
+    state: enabled 
+    permanent: True 
+    immediate: True

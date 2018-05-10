@@ -1,7 +1,0 @@
---- 
-- name: PLAY sur l'utilisation des variables
-  hosts: all  
-  remote_user: automatic 
-  roles: 
-    - { role: variables-role, ma_variable: "variable de role" } 
-    - role: variables-role     

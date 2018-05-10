@@ -1,0 +1,5 @@
+---
+# defaults file for roles/webserver
+protocols:
+  - { protocol: http, protocol_state: enabled, protocol_permanent: True, protocol_immediate: True }
+  - { protocol: https, protocol_state: enabled, protocol_permanent: True, protocol_immediate: False }

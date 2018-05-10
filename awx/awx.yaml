@@ -1,0 +1,15 @@
+- name: PLAY install Ansible Tower
+  hosts: awx
+  become: yes
+  vars:
+    nodejs_version: "6.x"
+    pip_install_packages:
+      - name: docker-py
+  roles:
+    - role-repo-epel
+    - role-git
+    - role-ansible
+    - role-docker
+    - role-pip
+    - role-nodejs
+    - role-awx

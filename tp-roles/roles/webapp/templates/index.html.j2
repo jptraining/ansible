@@ -1,0 +1,18 @@
+<html> 
+    <body> 
+        <h1>Hello World ! Greetings from host {{ inventory_hostname }}</h1> 
+        <p>This page was created on {{ ansible_date_time.date }}.</p>
+        <p>This webapp can be reached on any of the following IP addresses:</p> 
+        <ul>        
+{% for host in groups['webservers'] %} 
+            <li>{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}</li> 
+{% endfor %}
+        </ul>
+        <p>This webapp can be reached on any of the following host from the webservers groups:</p> 
+        <ul>
+{% for host in groups['webservers'] %} 
+            <li>{{ hostvars[host]['ansible_nodename'] }}</li> 
+{% endfor %}
+        </ul>
+    </body> 
+</html>

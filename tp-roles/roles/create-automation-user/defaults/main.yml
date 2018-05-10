@@ -1,0 +1,11 @@
+---
+# defaults file for roles/create-automation-user
+automation_user_name: ansible 
+automation_user_state: present 
+automation_user_comment: Ansible automation user 
+automation_user_key_state: present
+automation_user_key: https://raw.githubusercontent.com/jptraining/ansible/master/keys/id_rsa.pub
+automation_user_sudoers_file_dest: /etc/sudoers.d/ansible
+automation_user_sudoers_state: present
+automation_user_sudoers_regexp: '^ansible ALL\='
+automation_user_sudoers_line: 'ansible ALL=(ALL) NOPASSWD:ALL'

@@ -1,0 +1,19 @@
+- hosts: webservers 
+  remote_user: ansible
+  become: yes 
+  gather_facts: yes
+
+  tasks: 
+  - name: Afficher la valeur de la variable fact ansible_os_family 
+    debug: 
+      msg: 'ansible_os_family = {{ ansible_os_family }}' 
+  - name: Vérifier que apache est installé sur les machines RedHat et à jour 
+    yum: 
+      name: httpd 
+      state: latest     
+    when: ansible_os_family == 'RedHat' 
+  - name: Vérifier que apache est installé sur les machines Debian et à jour 
+    apt: 
+      name: apache2 
+      state: latest 
+    when: ansible_os_family == 'Debian' 

@@ -1,0 +1,19 @@
+--- 
+- name: PLAY for managing handlers in error handling
+  hosts: all 
+  remote_user: ansible
+
+  tasks:
+   - name: Attempt and gracefull roll back demo
+     block:
+       - debug:
+           msg: 'I execute normally'
+         notify: run me even after an error
+       - command: /bin/false
+     rescue:
+       - name: make sure all handlers run
+         meta: flush_handlers
+  handlers:
+   - name: run me even after an error
+     debug:
+       msg: 'this handler runs even on error'

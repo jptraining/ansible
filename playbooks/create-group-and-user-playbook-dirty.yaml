@@ -1,0 +1,39 @@
+---
+- name: "This Is The PLAY Documentation: This PLAY Runs Some Modules On The Target Hosts"
+  hosts: webservers
+  become: yes
+
+  tasks:
+  - name: "This Is The Task Documentation: This Task Executes The Group Module On Target Hosts"
+    group:
+      name: sysadmins
+      state: present
+
+  - name: "This Is The Task Documentation: This Task Executes The Group Module On Target Hosts"
+    group:
+      name: developpers
+      state: present
+
+  - name: "This Is The Task Documentation: This Task Executes The Group Module On Target Hosts"
+    group:
+      name: wheel
+      state: present
+
+  - name: "This Is The Task Documentation: This Task Creates Users On Target Hosts"
+    user:
+      name: developper1
+      group: developpers
+      groups: sysadmins
+      password: "{{ 'password1' | password_hash('sha512') }}"
+      state: present
+  - name: "This Is The Task Documentation: This Task Creates Users On Target Hosts"
+    user:
+      name: developper2
+      group: developpers
+      password: "{{ 'password2' | password_hash('sha512') }}"
+      state: present
+  - name: "This Is The Task Documentation: This Task Creates Users On Target Hosts"
+    user:
+      name: automatic
+      group: wheel
+      state: present

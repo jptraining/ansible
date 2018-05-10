@@ -1,0 +1,21 @@
+--- 
+- name: PLAY utilisation de delegate_to
+  hosts: database 
+  remote_user: ansible 
+  gather_facts: no
+
+  tasks: 
+  - name: Compter les process sur le serveur distant 
+    shell: ps | wc -l 
+    register: remote_processes_number
+  - name: Afficher le nombre de process sur le serveur distant 
+    debug: 
+      msg: 'Nombre de process sur le serveur distant : {{ remote_processes_number.stdout }}' 
+  - name: Compter les process sur le serveur local
+    shell: ps | wc -l
+    delegate_to: localhost 
+    register: local_processes_number
+    run_once: true 
+  - name: Afficher le nombre de process sur le serveur local 
+    debug: 
+      msg: 'Nombre de process sur le serveur local : {{ local_processes_number.stdout }}'

@@ -1,0 +1,20 @@
+---
+# tasks file for roles/webserver
+- name: Vérifiez que le package httpd est installé  
+  yum: 
+    name: httpd 
+    state: present 
+- name: Vérifiez que le service httpd est activé et en cours d'exécution 
+  service: 
+    name: httpd 
+    state: started 
+    enabled: True 
+- name: vérifier que http et https peuvent passer le pare-feu 
+  firewalld:
+    service: "{{ item.protocol }}" 
+    state: "{{ item.protocol_state }}"  
+    permanent: "{{ item.protocol_permanent }}"  
+    immediate: "{{ item.protocol_immediate }}" 
+  loop:
+  - { protocol: http, protocol_state: enabled, protocol_permanent: True, protocol_immediate: True }
+  - { protocol: https, protocol_state: enabled, protocol_permanent: True, protocol_immediate: True }

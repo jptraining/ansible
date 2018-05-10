@@ -1,6 +1,6 @@
 {
     "remotePath": "./ansible.git",
-    "host": "34.245.74.90",
+    "host": "34.245.199.46",
     "username": "user",
     "port": 22,
     "secure": true,

@@ -1,0 +1,19 @@
+--- 
+- name: PLAY using for error handling
+  hosts: all 
+  remote_user: ansible 
+
+  tasks: 
+  - name: This will not be counted as a failure
+    command: /bin/false
+    ignore_errors: yes
+    register: response
+
+  - name: Display the response from
+    debug:
+      msg: response = {{ response }}
+
+  - name: Fail if some characters are found in response
+    fail:
+      msg: response = {{ response }}
+    when: "some string" in response

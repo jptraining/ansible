@@ -1,0 +1,22 @@
+--- 
+- name: PLAY for managing handlers in error handling
+  hosts: all 
+  remote_user: ansible
+  vars:
+    installs:
+      - httpd
+      - memcached
+  tasks:
+    - name: Install Apache
+      block:
+        - yum:
+            name: "{{ installs }}"
+            state: installed
+        - shell: ls -l /tmp
+        - service:
+            name: apache
+            state: started
+            enabled: True
+      when: ansible_distribution == 'CentOS'
+      become: true
+      become_user: root

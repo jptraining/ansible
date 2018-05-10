@@ -1,0 +1,10 @@
+--- 
+- name: PLAY using loops with_items/with_nested
+  hosts: all 
+  remote_user: ansible 
+
+  tasks: 
+  - name: Fail when the response code equals 2
+    shell: whatever
+    register: response
+    failed_when: response.rc == 0 or diff_cmd.rc >= 2
