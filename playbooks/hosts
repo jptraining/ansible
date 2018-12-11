@@ -1,18 +1,7 @@
 [webservers]
-jpenekusu2.mylabserver.com
-jpenekusu6.mylabserver.com
-
-[lampws]
-jpenekusu2.mylabserver.com
-jpenekusu3.mylabserver.com
-jpenekusu5.mylabserver.com
+192.168.100.110
+192.168.100.200
 
 [database]
-jpenekusu5.mylabserver.com
-
-[loadbalancers]
-jpenekusu6.mylabserver.com
-
-[linuxservers:children]
-webservers
-loadbalancers
+192.168.100.120
+192.168.100.210
