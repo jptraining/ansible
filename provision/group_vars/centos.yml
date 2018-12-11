@@ -1,0 +1,4 @@
+hello_web:
+  package: "httpd"
+  service: "httpd"
+  docroot: "/var/www/html"

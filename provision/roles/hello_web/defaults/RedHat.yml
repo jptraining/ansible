@@ -1,0 +1,5 @@
+---
+hello_web:
+  docroot: /var/www/html
+  package: httpd
+  service: httpd
