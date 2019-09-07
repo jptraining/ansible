@@ -1,18 +1,33 @@
 --- 
 - hosts: all
-  remote_user: root
   become: yes
-  tasks: 
+
+  tasks:
+  - name: ensure .ssh directory is present
+    file:
+      path: "{{ ssh_key_dir }}"
+      state: directory
+
+  - name: ensure ssk key pair is present
+    openssh_keypair:
+      path: "{{ ssh_key_dir }}/{{ ssh_key_name }}"
+      owner: "{{ ssh_key_owner }}"
+      group: "{{ ssh_key_owner }}"
+    delegate_to: localhost
+    run_once: true
+
   - name: Ensure ansible user exists 
     user: 
       name: ansible 
       state: present 
       comment: Ansible automation user 
+  
   - name: Ensure ansible user accepts the SSH key 
     authorized_key: 
       user: ansible 
       state: present       
-      key: https://raw.githubusercontent.com/jptraining/ansible/master/keys/id_rsa.pub
+      key: "{{ lookup('file', '{{ ssh_key_dir }}/{{ ssh_key_name }}.pub') }}"
+
   - name: Ensure the line /etc/sudoers.d is present in sudoers file 
     lineinfile: 
       dest: /etc/sudoers
@@ -21,6 +36,7 @@
       regexp: '^#includedir /etc/sudoers.d' 
       line: '#includedir /etc/sudoers.d' 
       validate: 'visudo -cf %s'      
+
   - name: Ensure the ansible user is sudoer with no password required 
     lineinfile: 
       dest: /etc/sudoers.d/ansible 

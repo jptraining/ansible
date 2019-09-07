@@ -29,17 +29,3 @@
     service: 
       name: ntpd 
       state: started
-  - name: Vérfifier que FirewallD est present 
-    yum: 
-      name: firewalld 
-      state: present 
-  - name: Vérfifier que FirewallD est lancé 
-    service: 
-      name: firewalld 
-      state: started 
-  - name: Vérfifier que SSH peut passer le firewall 
-    firewalld: 
-      service: ssh 
-      state: enabled 
-      permanent: True 
-      immediate: True

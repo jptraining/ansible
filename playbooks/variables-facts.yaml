@@ -1,7 +1,6 @@
 --- 
 - name: PLAY sur l'utilisation des variables registered
-  hosts: all  
-  remote_user: automatic
+  hosts: all
   gather_facts: yes 
 
   tasks: 

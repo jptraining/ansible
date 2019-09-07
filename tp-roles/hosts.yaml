@@ -1,6 +1,6 @@
 [webservers]
-jpenekusu2.mylabserver.com
-jpenekusu6.mylabserver.com
+192.168.100.110
+192.168.100.120
 
 [database]
-jpenekusu5.mylabserver.com
+192.168.100.130

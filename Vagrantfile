@@ -7,14 +7,7 @@
 # you're doing.
 Vagrant.configure("2") do |config|
 
-  servers=[
-    {
-      :hostname => "controller",
-      :ip => "192.168.100.100",
-      :box => "centos/7",
-      :ram => 1024,
-      :controller => true
-    },    
+  servers=[    
     {
       :hostname => "centos1",
       :ip => "192.168.100.110",
@@ -28,21 +21,24 @@ Vagrant.configure("2") do |config|
       :ram => 1024
     },
     {
-      :hostname => "ubuntu1",
+      :hostname => "centos3",
       :ip => "192.168.100.130",
-      :box => "bento/ubuntu-18.10",
+      :box => "centos/7",
       :ram => 1024
-    }
+    },
+    {
+      :hostname => "controller",
+      :ip => "192.168.100.100",
+      :box => "centos/7",
+      :ram => 1024,
+      :controller => true
+    }	
   ]
   
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the ne documentation at
   # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "centos/7"
-  
   servers.each do |machine|
     config.vm.define machine[:hostname] do |node|
         node.vm.box = machine[:box]
@@ -51,20 +47,23 @@ Vagrant.configure("2") do |config|
         node.vm.provider "virtualbox" do |vb|
             vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
         end
+	# Run Ansible playbook on the master host
         if (!machine[:controller].nil?)
-          node.vm.provision "ansible_local" do |ansible|
-            ansible.playbook = "provision/playbook.yml"
-            ansible.verbose = false
-            ansible.limit          = "all"        
-            ansible.inventory_path = "provision/inventory"
-          end
-        end        
+			$ansible_installation_script = <<-SCRIPT
+			yum update -y
+			yum upgrade -y
+			yum install epel-release -y
+			yum install ansible -y
+			SCRIPT
+
+			node.vm.provision "shell", inline: $ansible_installation_script
+        end
+		$enable_password_authentication = <<-SCRIPT
+		sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+		#echo "ubuntu:ubuntu" | sudo chpasswd      
+		systemctl restart sshd		
+		SCRIPT
+		config.vm.provision "shell", inline: $enable_password_authentication  		
     end
   end
-
-	config.vm.provision "shell", inline: <<-SHELL
-      sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-#      echo "ubuntu:ubuntu" | sudo chpasswd      
-      systemctl restart sshd
-	SHELL
 end

@@ -1,7 +1,6 @@
 --- 
 - name: PLAY sur l'utilisation des variables registered
-  hosts: all  
-  remote_user: automatic 
+  hosts: all
   tasks: 
   - name: Enregistrer le resultat avec la variable registered ma_variable
     command: echo "ma_variable registered" 

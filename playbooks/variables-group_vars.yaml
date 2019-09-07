@@ -1,7 +1,6 @@
 --- 
 - name: PLAY sur l'utilisation des variables group_vars
-  hosts: all  
-  remote_user: automatic
+  hosts: all
   gather_facts: no
   tasks:  
   - name: Print variable 'user_groups' 

@@ -1,4 +1,8 @@
 ---
+ssh_key_dir: /home/vagrant/.ssh
+ssh_key_name: id_rsa
+ssh_key_owner: vagrant
+    
 authorized_key_list:
   - user: user
     public_key_path: /home/user/ansible.git/keys/id_rsa.pub

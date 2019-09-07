@@ -9,7 +9,8 @@
   authorized_key: 
     user: ansible 
     state: present       
-    key: https://raw.githubusercontent.com/jptraining/ansible/master/keys/id_rsa.pub
+    key: "{{ lookup('file', '/home/vagrant/.ssh/id_rsa.pub') }}"
+    #key: https://raw.githubusercontent.com/jptraining/ansible/master/keys/id_rsa.pub
 - name: Ensure the line /etc/sudoers.d is present in sudoers file 
   lineinfile: 
     dest: /etc/sudoers

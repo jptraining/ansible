@@ -12,8 +12,8 @@
   gather_facts: false
   tags: database  
   roles:
-  - role: common
-    tags: common  
+#  - role: common
+#    tags: common  
   - role: database
 
 - name: "PLAY de création du serveur web"
