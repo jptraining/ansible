@@ -5,7 +5,7 @@
 # sudo
 - name: Vérifier que l'utilisateur technique existe
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ user_ansible }}"
     state: present
     generate_ssh_key: yes
 
@@ -13,5 +13,5 @@
   lineinfile:
     path: /etc/sudoers
     state: present
-    regexp: '^{{ ansible_user }}\s'
-    line: '{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^{{ user_ansible }}\s'
+    line: '{{ user_ansible }} ALL=(ALL) NOPASSWD: ALL'
