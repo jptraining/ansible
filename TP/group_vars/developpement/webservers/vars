@@ -1,0 +1,17 @@
+---
+state: present
+user_groups:
+  - sysadmins
+  - developpers
+users:
+  - name: user1
+    group: developpers
+    password: "$6$nn8ko7wO$5CgwCTjhNUwugB3QqElkn1gstgWhpDsJTD2Iiyg1VVCOEp5UoFjYc9bh85RCZ1HL2rA5Ogv0/eulu4gbpTw5D."
+  - name: user2
+    group: sysadmins
+    groups: developpers
+    password: "$6$woGc.X2wfOlD3$z.zxCiMB.2toTQp9a34ss7L77curGesVYDFv7tvQI7f2cOKc9KH1FDkuQDr9OCYyS0fsaU/AktlhPujOrKHHb/"
+  - name: automatic
+    group: wheel
+
+ma_variable: ma_variable group_vars/webservers
