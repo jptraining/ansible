@@ -1,0 +1,7 @@
+---
+state: present
+user_groups:
+  - dba
+  - developpers
+
+ma_variable: ma_variable group_vars/database
