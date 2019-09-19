@@ -3,6 +3,20 @@
 # nom: ansible
 # clef ssh
 # sudo
+- name: ensure .ssh directory is present
+  file:
+    path: "{{ ssh_key_dir }}"
+    state: directory
+  delegate_to: localhost
+
+- name: ensure ssk key pair is present
+  openssh_keypair:
+    path: "{{ ssh_key_dir }}/{{ ssh_key_name }}"
+    owner: "{{ ssh_key_owner }}"
+    group: "{{ ssh_key_owner }}"
+  delegate_to: localhost
+  run_once: true
+
 - name: Vérifier que l'utilisateur technique existe
   user:
     name: "{{ user_ansible }}"
@@ -15,3 +29,9 @@
     state: present
     regexp: '^{{ user_ansible }}\s'
     line: '{{ user_ansible }} ALL=(ALL) NOPASSWD: ALL'
+
+- name: Ensure ansible user accepts the SSH key 
+  authorized_key: 
+    user: '{{ user_ansible }}'
+    state: present       
+    key: "{{ lookup('file', '{{ ssh_key_dir }}/{{ ssh_key_name }}.pub') }}"

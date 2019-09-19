@@ -1,3 +1,6 @@
 ---
 # defaults file for create-automation-user
-    user_ansible: ansible
+user_ansible: ansible
+ssh_key_dir: /home/vagrant/.ssh
+ssh_key_name: id_rsa
+ssh_key_owner: vagrant

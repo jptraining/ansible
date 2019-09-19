@@ -1,5 +1,6 @@
 ---
 - name: "This Is PLAY Documentation: This PLAY Executes Some Basic Commands On The Target Hosts"
   hosts: all
+  become: yes
   roles:
     - role: create-automation-user
