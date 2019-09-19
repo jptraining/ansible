@@ -1,13 +1,5 @@
 ---
 - name: "This Is PLAY Documentation: This PLAY Executes Some Basic Commands On The Target Hosts"
   hosts: all
-  tasks:
-  - name: "This Is Task Documentation: This Task Executes The Command pwd On Target Hosts"
-    copy:
-      src: "{{ src_dir_var }}/{{ file_name_var }}"
-      dest: "{{ src_dir_var }}/{{ file_name_var2 }}"
-      remote_src: true
-    register: resultat
-  - name: Afficher la variable register
-    debug:
-      msg: "la variable register vaut {{ resultat }}"
+  roles:
+    - role: create-automation-user

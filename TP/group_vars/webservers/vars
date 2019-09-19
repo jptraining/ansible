@@ -1,0 +1,4 @@
+tomcat_user: tomcat
+src_dir_var: /home/vagrant
+file_name_var2: host_files_130.txt
+file_name_var: new_host_files.txt

@@ -1,0 +1,17 @@
+---
+# tasks file for create-automation-user
+# nom: ansible
+# clef ssh
+# sudo
+- name: Vérifier que l'utilisateur technique existe
+  user:
+    name: "{{ ansible_user }}"
+    state: present
+    generate_ssh_key: yes
+
+- name: Vérifier que l'utilisateur technique peut éléver les privilèger sans pwd
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^{{ ansible_user }}\s'
+    line: '{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL'
