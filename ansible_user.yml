@@ -1,0 +1,15 @@
+---
+- name : create ansible account
+  hosts: all
+  become: true
+
+  tasks:
+   - name: create ansible group
+     group:
+       name: ansible
+       state: present
+   - name: create ansible user
+     user: 
+       name: ansible
+       state: present
+       group: ansible

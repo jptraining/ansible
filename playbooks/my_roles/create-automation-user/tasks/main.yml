@@ -1,0 +1,42 @@
+---
+# tasks file for create-automation-user
+- command: pwd
+- group:
+     name: ansible
+     state: present
+- user:
+     name: ansible
+     state: present
+     group: ansible
+- file:
+     path: /tmp/.ssh
+     state: directory
+  become: true
+- hosts: localhost
+  become: true
+  tasks:
+- file:
+    path: /tmp/.ssh
+    state: directory
+- file:
+    path: /home/ansible
+    state: directory
+- file:
+    path: /home/ansible/.ssh
+    state: directory
+- openssh_keypair:
+    path:  /home/ansible/.ssh/id_rsa
+    owner: ansible
+    group: ansible
+- copy:
+    src: /home/ansible/.ssh/
+    dest: /tmp/.ssh/
+    remote_src: true
+     
+- hosts: all
+  tasks:
+  - authorized_key:
+    user: ansible
+    state: present
+    key: "{{ lookup('file', '../../../../tmp/.ssh/id_rsa.pub') }}"
+ become: true

@@ -10,5 +10,5 @@ git config --global color.showbranch always
 
 #RedHat vs Centos
 sudo yum install bash-completion bash-completion-extras -y
-#locate bash_completion.sh
+#locate bash_completion.sh 
 source /etc/profile.d/bash_completion.sh
