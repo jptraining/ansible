@@ -15,22 +15,10 @@ Vagrant.configure("2") do |config|
       :ram => 1024
     },
     {
-      :hostname => "centos2",
-      :ip => "192.168.100.120",
-      :box => "centos/7",
-      :ram => 1024
-    },
-    {
-      :hostname => "centos3",
-      :ip => "192.168.100.130",
-      :box => "centos/7",
-      :ram => 1024
-    },
-    {
       :hostname => "controller",
       :ip => "192.168.100.100",
       :box => "centos/7",
-      :ram => 1024,
+      :ram => 2048,
       :controller => true
     }	
   ]

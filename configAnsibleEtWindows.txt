@@ -1,0 +1,28 @@
+Configuration de WInRM
+- Authentification basique (login/pwd) sur le service WInRM
+- Activation http et https (génération d'un certificat autosigné)
+=>powershell.exe -ExecutionPolicy ByPass -File ConfigureRemotingForAnsible.ps1
+
+- Configuration de WinRM Listener
+	- Vérifier le status du service
+		=> (Get-Service -Name winrm).Status	
+	- Vérifier les ports ouverts
+		- winrm enumerate winrm/config/Listener
+	- Activation https
+		=> winrm quickconfig -transport:https
+	- Utiliser les objets Group Policy pour les host mebre de domaine
+	- Test de WinRM
+		=>powershell
+		$username = "ansible"
+		$password = ConvertTo-SecureString -String "1ansible1" -AsPlainText -Force
+		$cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
+
+		$session_option = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
+		Invoke-Command -ComputerName 192.168.1.39 -UseSSL -ScriptBlock { ipconfig } -Credential $cred -SessionOption $session_option
+		
+Ansible controller config:
+sudo yum -y install python-pip
+sudo pip install "pywinrm>=0.3.0"
+
+Control version TLS:
+=>openssl s_client -connect 192.168.1.39:5986

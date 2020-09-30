@@ -1,0 +1,7 @@
+---
+- hosts: windows
+  tasks:
+  - win_lineinfile:
+      path: C:\temp\example.conf
+      regex: '^127\.0\.0\.1'
+      line: '127.0.0.1 localhost'
