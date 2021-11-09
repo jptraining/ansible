@@ -1,7 +1,6 @@
 --- 
 - name: PLAY sur l'utilisation des variables
-  hosts: all  
-  remote_user: automatic 
+  hosts: all
   tasks: 
   - name: Set variable 'ma_variable' 
     set_fact: 

@@ -2,3 +2,12 @@
 # defaults file for roles/webserver
 http_port: 80
 http_charset: "UTF-8"
+protocols:
+  - protocol: http
+    protocol_state: enabled
+    protocol_permanent: True
+    protocol_immediate: True
+  - protocol: https
+    protocol_state: enabled
+    protocol_permanent: True
+    protocol_immediate: False

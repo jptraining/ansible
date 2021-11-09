@@ -1,7 +1,6 @@
 --- 
 - name: PLAY sur l'utilisation des variables role/vars
   hosts: all  
-  remote_user: automatic 
   gather_facts: no
 
   roles: 

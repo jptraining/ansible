@@ -50,8 +50,6 @@ Vagrant.configure("2") do |config|
 	# Run Ansible playbook on the master host
         if (!machine[:controller].nil?)
 			$ansible_installation_script = <<-SCRIPT
-			yum update -y
-			yum upgrade -y
 			yum install epel-release -y
 			yum install ansible -y
 			SCRIPT

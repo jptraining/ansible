@@ -1,6 +1,6 @@
 ---
 - name: "This Is The PLAY Documentation: This PLAY Runs Some Modules On The Target Hosts"
-  hosts: webservers
+  hosts: all
   become: yes
 
   tasks:

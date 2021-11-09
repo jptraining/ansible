@@ -5,6 +5,7 @@
   gather_facts: false
   roles:
   - role: create-automation-user
+    tags: create-automation-user
 
 - name: "PLAY de création de la base des données"
   hosts: database
@@ -12,8 +13,8 @@
   gather_facts: false
   tags: database  
   roles:
-#  - role: common
-#    tags: common  
+  - role: common
+    tags: common  
   - role: database
 
 - name: "PLAY de création du serveur web"

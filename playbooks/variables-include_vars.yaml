@@ -1,7 +1,6 @@
 --- 
 - name: PLAY sur l'utilisation des variables include_vars
-  hosts: all  
-  remote_user: automatic 
+  hosts: webservers  
   tasks: 
   - name: Utilisation du module include_vars
     include_vars:

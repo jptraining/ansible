@@ -4,7 +4,7 @@
   tasks: 
   - name: Enregistrer le resultat avec la variable registered ma_variable
     command: echo "ma_variable registered" 
-    changed_when: ma_variable.rc != 0
+#    changed_when: ma_variable.rc != 0
     register: ma_variable
 
   - name: Print variable 'ma_variable' 

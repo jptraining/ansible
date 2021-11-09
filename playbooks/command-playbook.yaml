@@ -6,3 +6,10 @@
     command: pwd
   - name: "This Is Task Documentation: This Task Executes The Command 'ls -l /' On Target Hosts"
     command: ls -l /
+
+- name: "commentaire"
+  hosts: database
+  tasks:
+  - name: "task on database"
+    command: "ls -ltra"
+  - command: "ls -l /home"

@@ -2,5 +2,7 @@
 - name: PLAY sur l'utilisation des variables
   hosts: all  
   roles: 
-    - { role: variables-role, ma_variable: "variable de role" } 
-    - role: variables-role     
+    - role: variables-role
+      ma_variable: "variable de role"
+
+    - role: variables-role   

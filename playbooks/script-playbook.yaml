@@ -3,7 +3,7 @@
   hosts: webservers
   tasks:
   - name: "This Is Task Documentation: This Task Executes The script Module On Target Hosts"
-    script: my_script.sh Jerome
+    script: my_script3.sh Jerome
     register: response
   - name: Debug response
     debug:
