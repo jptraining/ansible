@@ -1,0 +1,23 @@
+group_name:
+   - sysadmins
+   - wheel
+   - developpers
+   - testeurs
+
+users:
+    - name: automatic
+      group: wheel
+      state: present
+    - name: developpeur1
+      group: developpers
+      state: present
+    - name: developpeur2
+      group: developpers
+      state: present      
+    - name: admin1
+      group: sysadmins
+      state: present
+    - name: admin2
+      group: sysadmins
+      groups: wheel
+      state: present
