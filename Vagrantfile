@@ -11,25 +11,25 @@ Vagrant.configure("2") do |config|
     {
       :hostname => "centos1",
       :ip => "192.168.100.110",
-      :box => "centos/7",
+      :box => "eurolinux-vagrant/centos-stream-9",
       :ram => 1024
     },
     {
       :hostname => "centos2",
       :ip => "192.168.100.120",
-      :box => "centos/7",
+      :box => "eurolinux-vagrant/centos-stream-9",
       :ram => 1024
     },
     {
       :hostname => "centos3",
       :ip => "192.168.100.130",
-      :box => "centos/7",
+      :box => "eurolinux-vagrant/centos-stream-9",
       :ram => 1024
     },
     {
       :hostname => "controller",
       :ip => "192.168.100.100",
-      :box => "centos/7",
+      :box => "eurolinux-vagrant/centos-stream-9",
       :ram => 1024,
       :controller => true
     }	
